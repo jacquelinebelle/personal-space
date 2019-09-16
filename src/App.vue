@@ -1,25 +1,27 @@
 <template>
   <div id="app">
     <Header />
+    <DayView :getPicture="getPictures" />
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
-
+import DayView from './components/DayView.vue'
 
 export default {
   name: 'app',
   components: {
-    Header
+    Header,
+    DayView
   }, methods: {
-    getPictures: async (date) => {
+    getPictures: async (date = '') => {
       try {
-        const res = await fetch(`${process.env.VUE_APP_ROOT_URL}date=${date}&key=${process.env.VUE_APP_API_KEY}`);
+        const res = await fetch(`${process.env.VUE_APP_ROOT_URL}date=${date}&api_key=${process.env.VUE_APP_API_KEY}`);
         const picture = await res.json();
-        console.log(picture)
+        return picture;
       } catch (error) {
-        throw new Error ('Error fetching pictures:', error)
+        throw new Error ('Error fetching pictures:', error.message)
       }
     }
   }
@@ -30,9 +32,9 @@ export default {
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0 24px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  margin-top: 60px;
 }
 </style>
