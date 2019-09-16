@@ -1,9 +1,22 @@
 <template>
   <article class="day-view">
-      <h2>
-          {{ title }}
-      </h2>
-      <p>i'm here</p>
+    <h2>
+        {{ title }}
+    </h2>
+    <img 
+        class="day-picture"
+        v-bind:src="pictureUrl"
+        v-bind:alt="title"
+        v-bind:title="copyright"
+    />
+    <div class="picture-info">
+        <p class="picture-date">
+            Posted on {{ date }}
+        </p>
+        <p class="picture-explanation">
+            {{ explanation }}
+        </p>
+    </div>
   </article>
 </template>
 
@@ -18,7 +31,8 @@ export default {
         date: '',
         title: '',
         pictureUrl: '',
-        explanation: ''
+        explanation: '',
+        copyright: ''
     }
   },
   async mounted() {
@@ -27,6 +41,7 @@ export default {
     this.title = dataObject.title;
     this.pictureUrl = dataObject.hdurl;
     this.explanation = dataObject.explanation;
+    this.copyright = dataObject.copyright;
   }
 };
 </script>
@@ -40,5 +55,7 @@ export default {
 .day-view {
     margin: 0 auto;
 }
+
+
 
 </style>
