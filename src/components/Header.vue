@@ -16,16 +16,9 @@ export default {
   src: url("../assets/rhinosans.ttf") format("truetype");
 } 
 
-
-.select-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 h1 {
-  font-size: 3rem;
+  font-size: 80px;
   font-family: "Rhino Sans";
-
+  letter-spacing: 5px;
 }
-
 </style>
