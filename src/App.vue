@@ -1,17 +1,27 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <Header />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/Header.vue'
 
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Header
+  }, methods: {
+    getPictures: async (date) => {
+      try {
+        const res = await fetch(`${process.env.VUE_APP_ROOT_URL}date=${date}&key=${process.env.VUE_APP_API_KEY}`);
+        const picture = await res.json();
+        console.log(picture)
+      } catch (error) {
+        throw new Error ('Error fetching pictures:', error)
+      }
+    }
   }
 }
 </script>
@@ -23,7 +33,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   margin-top: 60px;
 }
 </style>
