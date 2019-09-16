@@ -1,5 +1,9 @@
 <template>
   <article class="day-view">
+      <h2>
+          {{ title }}
+      </h2>
+      <p>i'm here</p>
   </article>
 </template>
 
@@ -7,7 +11,7 @@
 export default {
   name: "DayView",
   props: {
-
+      getPicture: { type: Function }
   },
   data() {
     return {
@@ -17,8 +21,12 @@ export default {
         explanation: ''
     }
   },
-  mounted() {
-
+  async mounted() {
+    const dataObject = await this.getPicture();
+    this.date = dataObject.date;
+    this.title = dataObject.title;
+    this.pictureUrl = dataObject.hdurl;
+    this.explanation = dataObject.explanation;
   }
 };
 </script>

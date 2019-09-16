@@ -1,19 +1,21 @@
 <template>
   <div id="app">
     <Header />
-    <button v-on:click="getPictures('2019-09-15')" >click</button>
+    <DayView :getPicture="getPictures" />
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
+import DayView from './components/DayView.vue'
 
 export default {
   name: 'app',
   components: {
-    Header
+    Header,
+    DayView
   }, methods: {
-    getPictures: async (date) => {
+    getPictures: async (date = '') => {
       try {
         const res = await fetch(`${process.env.VUE_APP_ROOT_URL}date=${date}&api_key=${process.env.VUE_APP_API_KEY}`);
         const picture = await res.json();
