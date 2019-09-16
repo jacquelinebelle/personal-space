@@ -32,9 +32,9 @@ export default {
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0 24px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  margin-top: 60px;
 }
 </style>

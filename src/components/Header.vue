@@ -20,5 +20,7 @@ h1 {
   font-size: 80px;
   font-family: "Rhino Sans";
   letter-spacing: 5px;
+  margin: 24px 0;
+  text-align: center;
 }
 </style>
