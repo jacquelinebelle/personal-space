@@ -1,12 +1,12 @@
 <template>
   <div id="app">
     <Header />
+    <button v-on:click="getPictures('2019-09-15')" >click</button>
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
-
 
 export default {
   name: 'app',
@@ -15,11 +15,11 @@ export default {
   }, methods: {
     getPictures: async (date) => {
       try {
-        const res = await fetch(`${process.env.VUE_APP_ROOT_URL}date=${date}&key=${process.env.VUE_APP_API_KEY}`);
+        const res = await fetch(`${process.env.VUE_APP_ROOT_URL}date=${date}&api_key=${process.env.VUE_APP_API_KEY}`);
         const picture = await res.json();
-        console.log(picture)
+        return picture;
       } catch (error) {
-        throw new Error ('Error fetching pictures:', error)
+        throw new Error ('Error fetching pictures:', error.message)
       }
     }
   }
