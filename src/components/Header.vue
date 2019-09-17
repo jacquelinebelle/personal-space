@@ -1,13 +1,25 @@
 <template>
-  <header class="header">
+  <header>
     <h1>Personal Space</h1>
+    <nav>
+      <ul>
+        <li>
+          <router-link class="link" exact to="/">Today's Space</router-link>
+        </li>
+        <li>
+          <router-link class="link" exact to="/month">Month Time</router-link>
+        </li>
+      </ul>
+    </nav>
   </header>
 </template>
 
 <script>
+
 export default {
   name: "Header",
 };
+
 </script>
 
 <style scoped>
@@ -23,4 +35,20 @@ h1 {
   margin: 24px 0;
   text-align: center;
 }
+
+ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  justify-content: space-evenly;
+}
+
+.link {
+  color: black;
+}
+
+.link:visited {
+  color: black;
+}
+
 </style>
