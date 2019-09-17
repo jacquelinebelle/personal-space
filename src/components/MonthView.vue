@@ -20,7 +20,16 @@ export default {
         pictures: []
     }
   },
-  
+  async mounted() {
+    this.getDate(this);
+    var numberOfDays = this.getNumberOfDaysInMonth(this.month, this.year);
+    for (let i = this.day; i > 0; i--) {
+        var picture = await this.getPicture(`${this.year}-${this.month}-${i}`);
+        picture.media_type === 'video' ? this.pictures.unshift(picture.url) : this.pictures.unshift(picture.hdurl)
+    }
+    console.log(this.pictures)
+
+  },
   methods: {
     getDate: (self) => {
         var today = new Date().toJSON().split('-');
