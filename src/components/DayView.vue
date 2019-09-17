@@ -36,7 +36,7 @@ export default {
     }
   },
   async mounted() {
-    const dataObject = await this.getPicture('2019-09-15');
+    const dataObject = await this.getPicture('');
     this.date = dataObject.date;
     this.title = dataObject.title;
     this.pictureUrl = dataObject.hdurl;
