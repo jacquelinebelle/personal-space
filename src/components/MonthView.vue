@@ -1,7 +1,16 @@
 <template>
     <article class="month-view">
         <h2>september</h2>
-       
+        <ol>
+            <li 
+                v-for="picture in pictures" v-bind:key="picture.key"
+            >
+                <img 
+                    class="month-picture"
+                    v-bind:src="picture.pic" 
+                />
+            </li>
+        </ol>
     </article>
 </template>
 
@@ -23,9 +32,10 @@ export default {
   async mounted() {
     this.getDate(this);
     var numberOfDays = this.getNumberOfDaysInMonth(this.month, this.year);
-    for (let i = this.day; i > 0; i--) {
+    
+    for (let i = 1; i <= this.day; i++) {
         var picture = await this.getPicture(`${this.year}-${this.month}-${i}`);
-        picture.media_type === 'video' ? this.pictures.unshift(picture.url) : this.pictures.unshift(picture.hdurl)
+        picture.media_type === 'video' ? this.pictures.push({pic: picture.url, key: picture.date}) : this.pictures.push({pic: picture.hdurl, key: picture.date})
     }
     console.log(this.pictures)
 
@@ -60,5 +70,8 @@ export default {
 
 <style scoped>
 
+.month-picture {
+    height: 100px;
+}
 
 </style>
