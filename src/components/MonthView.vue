@@ -7,7 +7,16 @@
             >
                 <img 
                     class="month-picture"
+                    v-if="picture.pic"
                     v-bind:src="picture.pic" 
+                />
+                <iframe 
+                    v-if="picture.vid"
+                    width="320" 
+                    height="240" 
+                    controls
+                    v-bind:src="picture.vid" 
+
                 />
             </li>
         </ol>
@@ -16,28 +25,34 @@
 
 <script>
 
+import picturesData from './data.js';
+
 export default {
   name: "MonthView",
   props: {
       getPicture: { type: Function }
+  },
+  components: {
+      picturesData
   },
   data() {
     return {
         day: '',
         month: '',
         year: '',
-        pictures: []
+        pictures: [],
     }
   },
   async mounted() {
     this.getDate(this);
     var numberOfDays = this.getNumberOfDaysInMonth(this.month, this.year);
     
-    for (let i = 1; i <= this.day; i++) {
-        var picture = await this.getPicture(`${this.year}-${this.month}-${i}`);
-        picture.media_type === 'video' ? this.pictures.push({pic: picture.url, key: picture.date}) : this.pictures.push({pic: picture.hdurl, key: picture.date})
-    }
-    console.log(this.pictures)
+    // for (let i = 1; i <= this.day; i++) {
+    //     var picture = await this.getPicture(`${this.year}-${this.month}-${i}`);
+    //     picture.media_type === 'video' ? this.pictures.push({vid: picture.url, key: picture.date}) 
+    //     : this.pictures.push({pic: picture.hdurl, key: picture.date})
+    // }
+    this.pictures = picturesData;
 
   },
   methods: {
@@ -69,6 +84,10 @@ export default {
 </script>
 
 <style scoped>
+
+ol {
+    list-style: none;
+}
 
 .month-picture {
     height: 100px;
