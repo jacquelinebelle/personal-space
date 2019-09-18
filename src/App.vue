@@ -39,11 +39,8 @@ export default {
   background-color: #ece5db;
   color: #35312D;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  height: fit-content;
   overflow: hidden;
   padding: 16px;
-  position: absolute;
-  top: 0; bottom: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
