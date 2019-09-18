@@ -10,22 +10,24 @@
             <li 
                 v-for="picture in pictures" 
                 v-bind:key="picture.key"
-            >
-                <img 
-                    class="month-picture month-item item"
-                    v-if="picture.pic"
-                    v-bind:src="picture.pic" 
-                    v-masonry-tile  
+            >   
+                <router-link exact :to="'/detail/' + picture.key">
+                    <img 
+                        class="month-picture month-item item"
+                        v-if="picture.pic"
+                        v-bind:src="picture.pic" 
+                        v-masonry-tile  
 
-                />
-                <iframe 
-                    class="month-video month-item item"
-                    v-if="picture.vid"
-                    controls
-                    v-bind:src="picture.vid" 
-                    v-masonry-tile  
+                    />
+                    <iframe 
+                        class="month-video month-item item"
+                        v-if="picture.vid"
+                        controls
+                        v-bind:src="picture.vid" 
+                        v-masonry-tile  
 
-                />
+                    />
+                </router-link>
             </li>
             <li
                 v-for="empty in empties" 
@@ -97,13 +99,11 @@ export default {
     },
 
     makeEmpties: (self) => {
-        console.log('me')
         var numberOfDays = self.getNumberOfDaysInMonth(self.month, self.year);
         
         for (let i = self.day; i <= numberOfDays; i++) {
             self.empties.push({value: i, key: i});
         }
-        console.log(self.empties)
     }
   }
 };
@@ -125,6 +125,10 @@ ol {
 .month-item {
     margin: 2px;
     width: 278px;
+}
+
+.month-item:hover {
+    cursor: pointer;
 }
 
 .empty {

@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <Header />
-    <router-view :getPicture="getPictures">
-      <DayView  />
+    <router-view :getPicture="getPictures" :key="$route.fullPath">
+      <DayView />
       <MonthView  />
     </router-view>
   </div>

@@ -1,33 +1,34 @@
 <template>
-  <article class="day-view">
-    <img 
-        class="day-picture"
-        v-bind:src="pictureUrl"
-        v-bind:alt="title"
-        v-bind:title="copyright"
-    />
-    <div class="picture-info">
-        <h2 class="picture-title">
-            {{ title }}
-        </h2>
-        <p class="picture-explanation">
-            {{ explanation }}
-        </p>
-        <p class="picture-date">
-            Posted on {{ date }}
-        </p>
-    </div>
-  </article>
+        <article class="day-view">
+            <img 
+                class="day-picture"
+                v-bind:src="pictureUrl"
+                v-bind:alt="title"
+                v-bind:title="copyright"
+            />
+            <div class="picture-info">
+                <h2 class="picture-title">
+                    {{ title }}
+                </h2>
+                <p class="picture-explanation">
+                    {{ explanation }}
+                </p>
+                <p class="picture-date">
+                    Posted on {{ date }}
+                </p>
+            </div>
+        </article>
 </template>
 
 <script>
 export default {
   name: "DayView",
   props: {
-      getPicture: { type: Function }
+      getPicture: { type: Function },
   },
   data() {
     return {
+        key: '',
         date: '',
         title: '',
         pictureUrl: '',
@@ -36,7 +37,10 @@ export default {
     }
   },
   async mounted() {
-    const dataObject = await this.getPicture('');
+    if (this.$route.params.key) {
+        this.date = this.$route.params.key;
+    }
+    const dataObject = await this.getPicture(this.date);
     this.date = dataObject.date;
     this.title = dataObject.title;
     this.pictureUrl = dataObject.hdurl;
