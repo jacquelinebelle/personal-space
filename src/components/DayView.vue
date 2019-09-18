@@ -2,7 +2,18 @@
         <article class="day-view">
             <img 
                 class="day-picture"
+                v-if="mediaType !== 'video'"
                 v-bind:src="pictureUrl"
+                v-bind:alt="title"
+                v-bind:title="copyright"
+            />
+              <iframe 
+                class="day-picture"
+                controls
+                height="100%"
+                width="100%"
+                v-if="mediaType === 'video'"
+                v-bind:src="url"
                 v-bind:alt="title"
                 v-bind:title="copyright"
             />
@@ -10,11 +21,11 @@
                 <h2 class="picture-title">
                     {{ title }}
                 </h2>
-                <p class="picture-explanation">
-                    {{ explanation }}
-                </p>
                 <p class="picture-date">
                     Posted on {{ date }}
+                </p>
+                <p class="picture-explanation">
+                    {{ explanation }}
                 </p>
             </div>
         </article>
@@ -32,6 +43,7 @@ export default {
         date: '',
         title: '',
         pictureUrl: '',
+        url: '',
         explanation: '',
         copyright: ''
     }
@@ -41,9 +53,12 @@ export default {
         this.date = this.$route.params.key;
     }
     const dataObject = await this.getPicture(this.date);
+    console.log(dataObject.url)
     this.date = dataObject.date;
     this.title = dataObject.title;
     this.pictureUrl = dataObject.hdurl;
+    this.url = dataObject.url;
+    this.mediaType = dataObject.media_type;
     this.explanation = dataObject.explanation;
     this.copyright = dataObject.copyright;
   }
@@ -78,15 +93,8 @@ export default {
 }
 
 .picture-explanation {
-    line-height: 32px;
+    line-height: 240%;
     margin: 0;
-}
-
-.picture-date {
-    bottom: 0;
-    left: 0;
-    margin: 0;
-    position: absolute;
 }
 
 </style>

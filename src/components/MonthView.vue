@@ -6,38 +6,58 @@
             horizontal-order="true"
             column-width=1
             fit-width="true"
+                        gutter=4
+
         >
             <li 
+                class="month-container item"
                 v-for="picture in pictures" 
                 v-bind:key="picture.key"
+                        v-masonry-tile  
+
             >   
-                <router-link exact :to="'/detail/' + picture.key">
+                    <p 
+                        class="month-number"
+                        :id="'month' + picture.day"
+                        v-bind:value="picture.day"
+                        
+                    >
+                        {{picture.day}}
+                    </p>
+                <router-link exact :to="'/detail/' + picture.key" class="link">
                     <img 
-                        class="month-picture month-item item"
+                        class="month-picture month-item "
                         v-if="picture.pic"
                         v-bind:src="picture.pic" 
-                        v-masonry-tile  
+                        
 
                     />
                     <iframe 
-                        class="month-video month-item item"
+                        class="month-video month-item "
                         v-if="picture.vid"
                         controls
+                        height="278px"
+                        width="278px"
                         v-bind:src="picture.vid" 
-                        v-masonry-tile  
 
                     />
+                    
                 </router-link>
             </li>
             <li
+                class="month-container item"
+                        v-masonry-tile  
+
                 v-for="empty in empties" 
                 v-bind:key="empty.key"
             >
                 <div
-                    class="empty month-item item"
+                    class="empty"
                     v-bind="empty.value"
                 >
-                    {{empty.value}}
+                    <p class="month-number empty-number">
+                        {{empty.value}}
+                    </p>
                 </div>
             </li>
         </ol>
@@ -68,14 +88,14 @@ export default {
   async mounted() {
     this.getDate(this);
     
-    // for (let i = 1; i <= this.day; i++) {
-    //     var picture = await this.getPicture(`${this.year}-${this.month}-${i}`);
-    //     picture.media_type === 'video' ? this.pictures.push({vid: picture.url, key: picture.date}) 
-    //     : this.pictures.push({pic: picture.hdurl, key: picture.date})
-    // }
+    for (let i = 1; i <= this.day; i++) {
+        var picture = await this.getPicture(`${this.year}-${this.month}-${i}`);
+        picture.media_type === 'video' ? this.pictures.push({day: i, vid: picture.url, key: picture.date}) 
+        : this.pictures.push({day: i, pic: picture.hdurl, key: picture.date})
+    }
     this.makeEmpties(this);
 
-    this.pictures = picturesData;
+    // this.pictures = picturesData;
 
   },
   methods: {
@@ -100,8 +120,9 @@ export default {
 
     makeEmpties: (self) => {
         var numberOfDays = self.getNumberOfDaysInMonth(self.month, self.year);
-        
-        for (let i = self.day; i <= numberOfDays; i++) {
+        var tomorrow = parseInt(self.day) + 1;
+        for (let i = tomorrow; i <= numberOfDays; i++) {
+            console.log('ay', i)
             self.empties.push({value: i, key: i});
         }
     }
@@ -116,6 +137,31 @@ h2 {
     text-align: center;
 }
 
+.item {
+    margin: 1px 2px;
+}
+
+.month-container {
+    width: 278px;
+    position: relative;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    
+}
+
+.month-number {
+    color: white;
+    font-size: 10vh;
+    top: 3%;
+    right: 9%;
+    margin: 0;
+    opacity: 0;
+    position: absolute; 
+    vertical-align: middle;
+    z-index: 2;
+}
+
 ol {
     list-style: none;
     margin: 0 auto;
@@ -123,23 +169,36 @@ ol {
 }
 
 .month-item {
-    margin: 2px;
+    margin: 0;
     width: 278px;
 }
 
 .month-item:hover {
     cursor: pointer;
+    filter: brightness(50%);
+}
+
+.link {
+    margin: 0 ;
+}
+
+.item:hover .month-number {
+    cursor: pointer;
+    opacity: 1;
+}
+
+iframe {
+    pointer-events: none;
 }
 
 .empty {
     background-color: gray;
-    color: white;
-    font-size: 32px;
     height: 278px;
-    line-height: 278px;
-    text-align: center;
-    vertical-align: middle;
+    width: 278px;
 }
 
+.empty-number {
+    opacity: 1;
+}
 
 </style>
