@@ -8,9 +8,8 @@
             fit-width="true"
         >
             <li 
-                v-for="picture in pictures" v-bind:key="picture.key"
-                
-                
+                v-for="picture in pictures" 
+                v-bind:key="picture.key"
             >
                 <img 
                     class="month-picture month-item item"
@@ -27,6 +26,17 @@
                     v-masonry-tile  
 
                 />
+            </li>
+            <li
+                v-for="empty in empties" 
+                v-bind:key="empty.key"
+            >
+                <div
+                    class="empty month-item item"
+                    v-bind="empty.value"
+                >
+                    {{empty.value}}
+                </div>
             </li>
         </ol>
     </article>
@@ -50,17 +60,19 @@ export default {
         month: '',
         year: '',
         pictures: [],
+        empties: []
     }
   },
   async mounted() {
     this.getDate(this);
-    var numberOfDays = this.getNumberOfDaysInMonth(this.month, this.year);
     
     // for (let i = 1; i <= this.day; i++) {
     //     var picture = await this.getPicture(`${this.year}-${this.month}-${i}`);
     //     picture.media_type === 'video' ? this.pictures.push({vid: picture.url, key: picture.date}) 
     //     : this.pictures.push({pic: picture.hdurl, key: picture.date})
     // }
+    this.makeEmpties(this);
+
     this.pictures = picturesData;
 
   },
@@ -84,8 +96,14 @@ export default {
         return new Date(year, month, 0).getDate()
     },
 
-    getPictures: () => {
-
+    makeEmpties: (self) => {
+        console.log('me')
+        var numberOfDays = self.getNumberOfDaysInMonth(self.month, self.year);
+        
+        for (let i = self.day; i <= numberOfDays; i++) {
+            self.empties.push({value: i, key: i});
+        }
+        console.log(self.empties)
     }
   }
 };
@@ -107,6 +125,16 @@ ol {
 .month-item {
     margin: 2px;
     width: 278px;
+}
+
+.empty {
+    background-color: gray;
+    color: white;
+    font-size: 32px;
+    height: 278px;
+    line-height: 278px;
+    text-align: center;
+    vertical-align: middle;
 }
 
 
