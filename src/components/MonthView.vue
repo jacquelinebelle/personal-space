@@ -127,7 +127,6 @@ export default {
         }
     }
   }
-};
 
 </script>
 
@@ -200,5 +199,4 @@ iframe {
 .empty-number {
     opacity: 1;
 }
-
 </style>
