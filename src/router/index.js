@@ -5,6 +5,7 @@ import MonthView from '@/components/MonthView'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -15,6 +16,11 @@ export default new Router({
       path: '/month',
       name: 'MonthView',
       component: MonthView
+    },
+    {
+      path:'/detail/:key',
+      name: 'DetailPage',
+      component: DayView
     }
   ]
 })

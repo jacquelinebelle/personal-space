@@ -1,19 +1,24 @@
 <template>
   <div id="app">
     <Header />
-    <DayView :getPicture="getPictures" />
+    <router-view :getPicture="getPictures" :key="$route.fullPath">
+      <DayView />
+      <MonthView  />
+    </router-view>
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
 import DayView from './components/DayView.vue'
+import MonthView from './components/MonthView.vue'
 
 export default {
   name: 'app',
   components: {
     Header,
-    DayView
+    DayView,
+    MonthView
   }, methods: {
     getPictures: async (date = '') => {
       try {
@@ -33,7 +38,8 @@ export default {
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   margin: 0;
-  padding: 0 24px;
+  overflow: hidden;
+  padding: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
