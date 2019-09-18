@@ -38,7 +38,8 @@ export default {
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   margin: 0;
-  padding: 0 24px;
+  overflow: hidden;
+  padding: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

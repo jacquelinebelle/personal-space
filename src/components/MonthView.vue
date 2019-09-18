@@ -1,21 +1,30 @@
 <template>
     <article class="month-view">
         <h2>september</h2>
-        <ol>
+        <ol
+            v-masonry transition-duration="0.3s" item-selector=".item"
+            horizontal-order="true"
+            column-width=1
+            fit-width="true"
+        >
             <li 
                 v-for="picture in pictures" v-bind:key="picture.key"
+                
+                
             >
                 <img 
-                    class="month-picture"
+                    class="month-picture month-item item"
                     v-if="picture.pic"
                     v-bind:src="picture.pic" 
+                    v-masonry-tile  
+
                 />
                 <iframe 
+                    class="month-video month-item item"
                     v-if="picture.vid"
-                    width="320" 
-                    height="240" 
                     controls
                     v-bind:src="picture.vid" 
+                    v-masonry-tile  
 
                 />
             </li>
@@ -85,12 +94,20 @@ export default {
 
 <style scoped>
 
-ol {
-    list-style: none;
+h2 {
+    text-align: center;
 }
 
-.month-picture {
-    height: 100px;
+ol {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
 }
+
+.month-item {
+    margin: 2px;
+    width: 278px;
+}
+
 
 </style>
