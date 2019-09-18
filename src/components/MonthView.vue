@@ -1,12 +1,11 @@
 <template>
     <article class="month-view">
-        <h2>september</h2>
         <ol
             v-masonry transition-duration="0.3s" item-selector=".item"
             horizontal-order="true"
             column-width=1
             fit-width="true"
-                        gutter=4
+            gutter=4
 
         >
             <li 
@@ -24,7 +23,7 @@
                     >
                         {{picture.day}}
                     </p>
-                <router-link exact :to="'/detail/' + picture.key" class="link">
+                <router-link exact :to="'/day/' + picture.key" class="link">
                     <img 
                         class="month-picture month-item "
                         v-if="picture.pic"
@@ -46,8 +45,7 @@
             </li>
             <li
                 class="month-container item"
-                        v-masonry-tile  
-
+                v-masonry-tile  
                 v-for="empty in empties" 
                 v-bind:key="empty.key"
             >
@@ -132,10 +130,6 @@ export default {
 
 <style scoped>
 
-h2 {
-    text-align: center;
-}
-
 .item {
     margin: 1px 2px;
 }
@@ -168,6 +162,7 @@ ol {
 }
 
 .month-item {
+    border-radius: 10px;
     margin: 0;
     width: 278px;
 }
@@ -192,6 +187,8 @@ iframe {
 
 .empty {
     background-color: gray;
+    border-radius: 10px;
+    margin-bottom: 8px;
     height: 278px;
     width: 278px;
 }

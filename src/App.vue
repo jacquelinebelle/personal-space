@@ -36,6 +36,8 @@ export default {
 <style>
 
 #app {
+  background-color: #ece5db;
+  color: #35312D;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   margin: 0;
   overflow: hidden;
