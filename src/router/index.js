@@ -13,12 +13,17 @@ export default new Router({
       component: DayView
     },
     {
+      path: '/day',
+      name: 'DayView',
+      component: DayView
+    },
+    {
       path: '/month',
       name: 'MonthView',
       component: MonthView
     },
     {
-      path:'/detail/:key',
+      path:'/day/:key',
       name: 'DetailPage',
       component: DayView
     }

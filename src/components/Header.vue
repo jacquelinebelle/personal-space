@@ -1,13 +1,15 @@
 <template>
   <header>
-    <h1>Personal Space</h1>
+    <router-link class="link header-link" exact to="/">
+      <h1>Personal Space</h1>
+    </router-link>
     <nav>
       <ul>
         <li>
-          <router-link class="link" exact to="/">Today's Space</router-link>
+          <router-link class="link" exact to="/day">space of the day</router-link>
         </li>
         <li>
-          <router-link class="link" exact to="/month">Month Time</router-link>
+          <router-link class="link" exact to="/month">this month of space</router-link>
         </li>
       </ul>
     </nav>
@@ -28,11 +30,19 @@ export default {
   src: url("../assets/rhinosans.ttf") format("truetype");
 } 
 
+@import url('https://fonts.googleapis.com/css?family=Sacramento&display=swap');
+
+header {
+  margin-bottom: 48px;
+
+}
+
 h1 {
+  color: #3E3934;
   font-size: 80px;
   font-family: "Rhino Sans";
   letter-spacing: 5px;
-  margin: 24px 0;
+  margin: 24px 0 0;
   text-align: center;
 }
 
@@ -43,12 +53,26 @@ ul {
   justify-content: space-evenly;
 }
 
+li {
+  color: #d0bc96;
+  font-family: 'Sacramento', cursive;
+  font-size: 48px;
+}
+
 .link {
-  color: black;
+  color: #35312D;
+
+  text-decoration: none;
+
+}
+
+.link:hover {
+  font-weight: 600;
 }
 
 .link:visited {
-  color: black;
+  color: #35312D;
+
 }
 
 </style>

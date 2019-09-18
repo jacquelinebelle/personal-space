@@ -75,7 +75,8 @@ export default {
 }
 
 .day-picture {
-    margin-top: 8px;
+    border-radius: 10px;
+    margin-top: 4px;
     max-width: 50vw;
 }
 
